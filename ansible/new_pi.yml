@@ -1,0 +1,10 @@
+# initialize a brand new pi with the key necessary to work within the system
+- name: Initialize a new Pi
+  hosts: new
+  remote_user: pi
+  sudo: yes
+  tasks:
+      - name: add root key
+        authorized_key: manage_dir=yes user=root state=present key={{ item }}
+        with_file:
+            - public_keys/root_ssh_key.pub
