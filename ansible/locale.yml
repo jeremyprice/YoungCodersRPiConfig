@@ -1,0 +1,21 @@
+# set the locale for the Pis
+
+---
+
+- name: Locale setup (US english)
+  hosts: rpi
+  vars:
+      locale: en_US.UTF-8
+      timezone: America/Chicago
+  tasks:
+      - name: set locale
+        command: /usr/sbin/update-locale LANG={{ locale }} LC_ALL={{ locale }}
+      - name: set localtime
+        file: src=/usr/share/zoneinfo/{{ timezone }} dest=/etc/localtime state=link force=yes
+      - name: set timezone
+        template: src=templates/etc/timezone dest=/etc/timezone
+        notify: update tzdata
+
+  handlers:
+      - name: update tzdata
+        command: /usr/sbin/dpkg-reconfigure --frontend noninteractive tzdata
