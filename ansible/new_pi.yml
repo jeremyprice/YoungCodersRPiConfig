@@ -7,7 +7,4 @@
   remote_user: pi
   become: yes
   tasks:
-      - name: add root key
-        authorized_key: manage_dir=yes user=root state=present key={{ item }}
-        with_file:
-            - public_keys/root_ssh_key.pub
+      - include: tasks/root_key.yml

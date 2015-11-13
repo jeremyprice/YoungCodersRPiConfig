@@ -1,8 +1,5 @@
-- name: Add the root login public key
-  tasks:
-      - name: add root key
-        authorized_key: manage_dir=yes user=root state=present key={{ item }}
-        with_file:
-            - public_keys/root_ssh_key.pub
-      - include: tasks/users.yml
-      - include: tasks/locale.yml
+# add the root key to the pis
+- name: add root key
+  authorized_key: manage_dir=yes user=root state=present key={{ item }}
+  with_file:
+    - public_keys/root_ssh_key.pub

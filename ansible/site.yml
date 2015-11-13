@@ -1,0 +1,11 @@
+# initialize a brand new pi with the key necessary to work within the system
+# run with the -k flag to enter the pi user's password:
+# ansible-playbook -i hosts -k new_pi.yml
+
+- name: Config all the Young Coder specific details on the pi
+  hosts: rpi
+  tasks:
+      - include: tasks/users.yml
+      - include: tasks/locale.yml
+  handlers:
+      - include: handlers/handlers.yml
