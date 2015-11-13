@@ -1,0 +1,18 @@
+# make sure the users are setup properly on the Pi
+
+# Tasks:
+# create a yc user (short for young coders)
+#   without sudo access so the students have a limited privelidge account to hack around in
+# change the password for the pi user
+#   since the pi user has sudo access we don't want the students using that account
+---
+- name: Setup user accounts
+  hosts: rpi*
+  vars:
+      yc_passwd: $6$kl6shTomdLkt$Q7c8B4fMvIjkIFZaVVS/cA8O7y8zcDA6YKN88GjV4RD8A9HWD2VZDk1CXrGp34vUAp0GyUfq.jlujU1ozP89u0
+      pi_passwd: $6$v1UxJfnZVa$JPA3fotSOI35VzLy/uN0wRFcDXeM0RQWLw68K382Wyog7XlSr3S.us75aVj9uMdwmNDU7p33McRH8r50B.zB90
+  tasks:
+      - name: add yc user
+        user: name=yc state=present uid=8888 update_password=always password={{ yc_passwd }}
+      - name: change pi user password
+        user: name=pi state=present update_password=always password={{ pi_passwd }}
