@@ -5,7 +5,7 @@
 - name: Initialize a new Pi
   hosts: new
   remote_user: pi
-  sudo: yes
+  become: yes
   tasks:
       - name: add root key
         authorized_key: manage_dir=yes user=root state=present key={{ item }}
