@@ -16,10 +16,17 @@
 - name: load our system-wide cleanup script
   copy: src=files/lightdm_cleanup_system.sh dest=/usr/local/bin/lightdm_cleanup.sh
         owner=root group=root mode=u=rwx,g=rwx,o=rx
-- name: load our yc user cleanup script
+- name: load our yc user logout cleanup script
   copy: src=files/lightdm_cleanup_yc.sh dest=/home/yc/.lightdm_cleanup.sh
         owner=yc group=yc mode=u=rwx,g=rwx
-- name: Wire in our cleanup script
+- name: create the directory to house our login cleanup script
+  file: state=directory path=/home/yc/.config/autostart/ owner=yc group=yc
+        mode=u=rwx,g=rwx
+- name: load our yc user login cleanup script
+  copy: src=files/python_games_cleanup.desktop
+        dest=/home/yc/.config/autostart/python_games_cleanup.desktop
+        owner=yc group=yc mode=u=rw,g=rw
+- name: Wire in our system-wide cleanup script
   lineinfile: dest=/etc/lightdm/lightdm.conf
               line=session-cleanup-script=/usr/local/bin/lightdm_cleanup.sh
               regexp="#session-cleanup-script=" insertafter=EOF state=present
