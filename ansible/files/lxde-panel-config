@@ -68,16 +68,7 @@ Plugin {
       id=/usr/share/applications/lxterminal.desktop
     }
     Button {
-      id=/usr/share/applications/python2.7.desktop
-    }
-    Button {
-      id=/usr/share/applications/python3.2.desktop
-    }
-    Button {
       id=/usr/share/applications/idle-python2.7.desktop
-    }
-    Button {
-      id=/usr/share/applications/idle-python3.2.desktop
     }
   }
 }

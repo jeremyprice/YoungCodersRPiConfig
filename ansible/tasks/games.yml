@@ -9,3 +9,5 @@
   unarchive: dest=/home/yc/ src=files/python_games.tar.gz
 - name: Set the owner of python_games to yc
   file: path=/home/yc/python_games recurse=yes mode=ugo+r owner=yc group=yc
+- name: Create a link to the python_games on the desktop
+  file: src=/home/yc/python_games dest=/home/yc/Desktop/python_games owner=yc group=yc state=link
