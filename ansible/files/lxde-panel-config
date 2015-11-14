@@ -62,6 +62,9 @@ Plugin {
   type=launchbar
   Config {
     Button {
+      id=/usr/share/applications/lxde-logout.desktop
+    }
+    Button {
       id=/usr/share/applications/pcmanfm.desktop
     }
     Button {

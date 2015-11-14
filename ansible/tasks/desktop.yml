@@ -6,9 +6,22 @@
 - name: upload the lxde config file
   copy: src=files/lxde-panel-config dest=/home/yc/.config/lxpanel/LXDE-pi/panels/panel
         owner=yc group=yc
+- name: put a logout link on the desktop
+  file: src=/usr/share/applications/lxde-logout.desktop dest=/home/yc/Desktop/logout
+        owner=yc group=yc mode=u=rwx,g=rwx state=link
 # setup the Xserver to auto start at boot and login yc
 - name: Set the yc user to autologin on the GUI
   lineinfile: dest=/etc/lightdm/lightdm.conf state=present line=autologin-user=yc
               regexp=autologin-user=pi insertafter=EOF
+- name: load our system-wide cleanup script
+  copy: src=files/lightdm_cleanup_system.sh dest=/usr/local/bin/lightdm_cleanup.sh
+        owner=root group=root mode=u=rwx,g=rwx,o=rx
+- name: load our yc user cleanup script
+  copy: src=files/lightdm_cleanup_yc.sh dest=/home/yc/.lightdm_cleanup.sh
+        owner=yc group=yc mode=u=rwx,g=rwx
+- name: Wire in our cleanup script
+  lineinfile: dest=/etc/lightdm/lightdm.conf
+              line=session-cleanup-script=/usr/local/bin/lightdm_cleanup.sh
+              regexp="#session-cleanup-script=" insertafter=EOF state=present
 - name: Set the GUI to start at boot time
   service: name=lightdm enabled=yes state=started
