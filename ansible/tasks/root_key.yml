@@ -1,4 +1,5 @@
 # add the root key to the pis
+---
 - name: add root key
   authorized_key: manage_dir=yes user=root state=present key={{ item }}
   with_file:
