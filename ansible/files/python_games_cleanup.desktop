@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=lightdm_cleanup.sh
+Exec=/home/yc/.lightdm_cleanup.sh
+Type=Application
+Terminal=false
