@@ -3,6 +3,9 @@
 
 ---
 # fix the icons on the desktop
+- name: make sure the config file is created
+  file: path=/home/yc/.config/lxpanel/LXDE-pi/panels state=directory owner=yc group=yc
+  
 - name: upload the lxde config file
   copy: src=files/lxde-panel-config dest=/home/yc/.config/lxpanel/LXDE-pi/panels/panel
         owner=yc group=yc
