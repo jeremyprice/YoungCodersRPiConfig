@@ -10,5 +10,9 @@
       - include: tasks/system.yml
       - include: tasks/games.yml
       - include: tasks/desktop.yml
+
+      - name: shutdown the new pi
+        command: /sbin/shutdown -h now
+
   handlers:
       - include: handlers/handlers.yml

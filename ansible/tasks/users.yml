@@ -8,5 +8,6 @@
 ---
   - name: add yc user and set password
     user: name=yc state=present uid=8888 update_password=always password={{ yc_user_passwd }}
+    
   - name: change pi user password
     user: name=pi state=present update_password=always password={{ pi_user_passwd }}

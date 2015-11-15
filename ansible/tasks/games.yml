@@ -3,11 +3,19 @@
 ---
 - name: Make sure the golden python_games directory is on the box
   unarchive: dest=/opt/ src=files/python_games.tar.gz
+  
 - name: Set the owner and permissions so we can access the opt directory
   file: path=/opt/python_games recurse=yes mode=ugo+r
+
 - name: Copy the python_games to the yc home directory
   unarchive: dest=/home/yc/ src=files/python_games.tar.gz
+
 - name: Set the owner of python_games to yc
   file: path=/home/yc/python_games recurse=yes mode=ugo+r owner=yc group=yc
+
+- name: Make the Desktop directory if it doesn't exist
+  file: path=/home/yc/Desktop state=directory owner=yc group=yc
+
 - name: Create a link to the python_games on the desktop
-  file: src=/home/yc/python_games dest=/home/yc/Desktop/python_games owner=yc group=yc state=link
+  file: src=/home/yc/python_games dest=/home/yc/Desktop/python_games
+        owner=yc group=yc state=link force=yes
