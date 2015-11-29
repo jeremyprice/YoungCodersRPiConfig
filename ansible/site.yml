@@ -7,7 +7,7 @@
   tasks:
       - include: tasks/users.yml
       - include: tasks/locale.yml
-      - include: tasks/system.yml
+      # - include: tasks/system.yml
       - include: tasks/games.yml
       - include: tasks/desktop.yml
 

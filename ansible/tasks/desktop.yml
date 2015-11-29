@@ -5,7 +5,7 @@
 # fix the icons on the desktop
 - name: make sure the config file is created
   file: path=/home/yc/.config/lxpanel/LXDE-pi/panels state=directory owner=yc group=yc
-  
+
 - name: upload the lxde config file
   copy: src=files/lxde-panel-config dest=/home/yc/.config/lxpanel/LXDE-pi/panels/panel
         owner=yc group=yc
@@ -13,6 +13,9 @@
 - name: put a logout link on the desktop
   file: src=/usr/share/applications/lxde-logout.desktop dest=/home/yc/Desktop/logout
         owner=yc group=yc mode=u=rwx,g=rwx state=link
+
+- name: enable lightdm to start at boot
+  service: name=lightdm state=started enabled=yes
 
 - name: put a link to python idle on the desktop
   file: src=/usr/share/applications/idle-python2.7.desktop dest=/home/yc/Desktop/Python
